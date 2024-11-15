@@ -5,7 +5,7 @@ import os
 battery_names = [29, 33, 41, 45, 49, 53]
 
 # 输出目录
-output_dir = r'C:\Users\Administrator\Desktop\AIGC\output'
+output_dir = r'C:\\Users\\Administrator\\Desktop\\AIGC-batterty\\AIGC\\output'
 
 # 如果输出目录不存在，创建一个
 if not os.path.exists(output_dir):
@@ -48,13 +48,16 @@ def extract_and_save_data(mat_file_path, battery_name):
                     t = col[i][3][0][0][j][0]
                     Time1.extend([t[m] for m in range(len(t))])
 
-            # 将每个 'charge' 类型数据追加到列表
             Voltage.extend(Voltage1)
+            Voltage.append("\n")
             Current.extend(Current1)
+            Current.append("\n")
             Temperature.extend(Temperature1)
+            Temperature.append("\n")
             Time.extend(Time1)
+            Time.append("\n")
 
-    # 保存到文件
+            # 保存到文件
     battery_num = f'{battery_name:02d}'  # 电池编号格式为两位数
     save_to_file(Voltage, Current, Temperature, Time, battery_num)
 
@@ -81,7 +84,7 @@ def save_to_file(Voltage, Current, Temperature, Time, battery_num):
 
 # 遍历每个电池文件，提取数据并保存
 for battery_name in battery_names:
-    mat_file_path = f'C:\\Users\\Administrator\\Desktop\\AIGC\\venv\\B00{battery_name}.mat'
+    mat_file_path = f'C:\\Users\\Administrator\\Desktop\\AIGC-batterty\\AIGC\\venv\\B00{battery_name}.mat'
     if os.path.exists(mat_file_path):
         extract_and_save_data(mat_file_path, battery_name)
     else:
